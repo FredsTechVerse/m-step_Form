@@ -4,7 +4,7 @@ const Stepper = ({ steps }) => {
   // THis is also a read only component.
   const { currentStep } = useCurrentStepContext();
   const [newStep, setNewStep] = useState([]);
-  const stepsRef = useRef();
+  const stepsRef = useRef(); //Initialsized without an initial value in the current prop.
 
   /* Function to update the fattened steps accordingly.Parameters to update :-
      If the step has been :- Highlighted , Completed or/and selected. */
@@ -14,11 +14,6 @@ const Stepper = ({ steps }) => {
     let count = 0;
     // While the count is less that 4 ... It loops 3 times.
     while (count < newSteps.length) {
-      /* A function that updates the fattened steps(Icons) according to three cases:-
-      a) The Icon that is equal to current step/position.
-      b) The Icon greater than the current step/position.
-      c) The Icon less than the current step/position.
-      */
       if (count === stepNumber) {
         // Case 1 : To the Icon at/equal to the current position.
         newSteps[count] = {
@@ -73,7 +68,7 @@ const Stepper = ({ steps }) => {
         }
       )
     );
-
+    // Similar use to useState only that shit doesnt rerender everytime the state changes.
     stepsRef.current = stepsState; //This is the value to be persisted accross rerenders.
     const current = updateStep(currentStep - 1, stepsRef.current);
     setNewStep(current);
