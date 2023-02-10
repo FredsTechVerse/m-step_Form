@@ -4,4 +4,15 @@ import Final from "./steps/Final";
 import Payment from "./steps/Payment";
 import Stepper from "./Stepper";
 import StepperControl from "./StepperControl";
-export { Account, Details, Final, Payment, Stepper, StepperControl };
+import FormHeader from "./FormHeader";
+import Registration from "./Registration";
+export {
+  Account,
+  Details,
+  Final,
+  Payment,
+  Stepper,
+  StepperControl,
+  FormHeader,
+  Registration,
+};

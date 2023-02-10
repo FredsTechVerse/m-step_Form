@@ -2,7 +2,7 @@ import { useStepperContext } from "../../contexts/StepperContext";
 
 export default function Payment() {
   const { userData, setUserData } = useStepperContext();
-
+  console.log(userData);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });

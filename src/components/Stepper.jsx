@@ -10,7 +10,6 @@ const Stepper = ({ steps }) => {
      If the step has been :- Highlighted , Completed or/and selected. */
   const updateStep = (stepNumber, steps) => {
     const newSteps = [...steps]; //Contains the fattened steps.
-    // console.log(newSteps);
     let count = 0;
     // While the count is less that 4 ... It loops 3 times.
     while (count < newSteps.length) {
@@ -21,13 +20,13 @@ const Stepper = ({ steps }) => {
           ...newSteps[count],
           highlighted: true,
           selected: true,
-          completed: true,
+          completed: false,
         };
         count++;
       }
 
-      // Case 2 : To the Icon behind/less than the current position.
-      // The have already been highlighted, selected and completed.
+      // Case 2 : To the Icon behind/less than the current position
+      // The have already been highlighted, selected and completed.So we apply this set of properties.
       else if (count < stepNumber) {
         newSteps[count] = {
           ...newSteps[count],
@@ -78,20 +77,21 @@ const Stepper = ({ steps }) => {
     return (
       <div
         key={index}
-        className={
-          index !== newStep.length - 1
-            ? "w-full flex items-center"
-            : "flex items-center"
-        }
+        className={` ${index == newStep.length - 1 ? "" : "w-full"}
+          ${
+            index !== newStep.length - 1
+              ? " flex items-center"
+              : "flex items-center"
+          }`}
       >
-        <div className="relative flex flex-col items-center text-teal-600">
-          {/* Deals with the circle. */}
+        <div className="relative flex flex-col items-center justify-center  text-black">
+          {/* Deals with the surrounding. */}
           <div
             className={`rounded-full transition duration-500 ease-in-out border-2 border-gray-300 h-12 w-12 flex items-center justify-center py-3  ${
               step.selected
-                ? "bg-green-600 text-white font-bold border border-green-600 "
+                ? "border-4 border-primary text-primary font-bold "
                 : ""
-            }`}
+            } ${step.completed ? "bg-primary" : ""}`}
           >
             {/*Displays a number or an icon.*/}
             {step.completed ? (
@@ -101,8 +101,9 @@ const Stepper = ({ steps }) => {
               index + 1
             )}
           </div>
+          {/* Deals with the description. */}
           <div
-            className={`absolute top-0  text-center mt-16 w-32 text-xs font-medium uppercase ${
+            className={`absolute text-center mt-24 w-32 text-xs font-medium uppercase phone:hidden ${
               step.highlighted ? "text-gray-900" : "text-gray-400"
             }`}
           >
@@ -111,16 +112,16 @@ const Stepper = ({ steps }) => {
         </div>
         {/* DEALS WITH THE LINE. */}
         <div
-          className={`flex-auto border-t-2 transition duration-500 ease-in-out  ${
-            step.completed ? "border-green-600" : "border-gray-300 "
-          }  `}
+          className={`w-full h-0.5 transition duration-500 ease-in-out  ${
+            step.completed ? "bg-primary" : "bg-gray-300 "
+          } ${index == newStep.length - 1 ? "hidden" : ""} `}
         ></div>
       </div>
     );
   });
 
   return (
-    <div className="mx-4 p-4 flex justify-between items-center">
+    <div className="mx-4 p-4 flex justify-between items-center w-full">
       {stepsDisplay}
     </div>
   );

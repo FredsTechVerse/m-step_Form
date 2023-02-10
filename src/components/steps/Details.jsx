@@ -4,8 +4,6 @@ export default function Details() {
   const { userData, setUserData } = useStepperContext();
 
   const handleChange = (e) => {
-    console.log(e.target);
-    console.log(userData);
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
